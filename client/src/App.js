@@ -1,17 +1,19 @@
+import React from "react"
 import './App.css';
 
-function callBackend() {
-  alert("backend")
-  fetch("http://localhost:5000/api")
-  .then((response) => response.json())
-  .then((data) => console.log(data));
-}
-
 function App() {
+  const [info, setInfo] = React.useState("Click button");
   return (
     <div name="content">
       <p>Hello World</p>
-      <button onClick={callBackend}>Run</button>
+      <button onClick={() => {
+        fetch("http://localhost:5000/api")
+        .then((response) => response.json())
+        .then((data) => {
+          setInfo(data.example);
+        });
+      }}>Run</button>
+      <p name="rendered">{info}</p>
     </div>
   );
 }
